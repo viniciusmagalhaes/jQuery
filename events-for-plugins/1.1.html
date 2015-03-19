@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Jquery</title>
+    <script src="../jquery.js"></script>
+    <script>
+        $(function(){
+
+            function imagem ()
+            {
+                document.write(" Exibir Imagem ");
+            }
+            function status()
+            {
+                document.write(" Exibir Status ");
+            }
+            function zoom ()
+            {
+                document.write(" Zoom ");
+            }
+
+            $("button").on("click.imagem", imagem);
+            $("button").on("click.status", status);
+            $("button").on("click.zoom", zoom);
+
+            // especificando com o namespace do button
+            // $("button").off("click.zoom");
+            // $("button").off(".imagem");
+
+            // $("button").trigger("click");
+            // desencadear um evento especifico
+            $("button").trigger("click.zoom");
+
+        });
+    </script>
+</head>
+<body>
+    <button>Exibir todos os preço</button>
+    <ul>
+        <li data-price="200">
+            <h2></h2>
+            <p></p>
+            <button></button>
+        </li>
+        <li data-price="300">
+            <h2></h2>
+            <p></p>
+            <button></button>
+        </li>
+        <li data-price="400">
+            <h2></h2>
+            <p></p>
+            <button></button>
+        </li>
+    </ul>
+</body>
+</html>

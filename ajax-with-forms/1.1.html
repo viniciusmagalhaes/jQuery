@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery - Ajax with Forms 1.1</title>
+    <style>
+        *
+        {
+            margin: 0;
+        }
+    </style>
+    <script src="../jquery.js"></script>
+
+    <script>
+        $(document).ready(function(){
+
+            $("form").on("submit", function(event){
+                event.preventDefault();
+                $.ajax($("form").attr("action"), {
+                    type: $("form").attr("method"),
+                    // especificando o tipo de conteudo
+                    contentType: 'arquivo.json',
+                    data: $("form").serialize(),
+                    // especificando o formato que iremos receber do servidor
+                    dataType: 'json',
+
+                    success: function(response) {
+                        $("form").hide();
+                        var msg = $("<p></p>");
+                        msg.append("Local: " + response.location + ".");
+                        msg.append("Preço: " + response.totalPrice + ".");
+                        msg.append("Noites: " + response.nights + ".");
+                        $(".formulario").html(response);
+                    },
+                    error: function(request, errorType, errorMessage){
+                        alert(errorType + " - " + errorMessage);
+                    }
+
+                });
+            });
+
+        });
+    </script>
+</head>
+<body>
+    <div class="formulario">
+        <form method="POST" action="/arquivo">
+            <label>
+                <input type="number" value="" />
+            </label>
+            <input type="submit" value="arquivo" />
+        </form>
+    </div>
+</body>
+</html>

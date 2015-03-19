@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery</title>
+    <style>
+        .container {
+            display: none;
+        }
+    </style>
+    <script src="../jquery.js"></script>
+    <script>
+        $(function(){
+
+            var obj = {
+                // Referencia a div
+                container: $(".container"),
+
+                init: function() {
+                    $("<button>Exibir</button>")
+                        .insertAfter(".container")
+                        .on("click", this.exibir);
+
+                    $("<button>Fechar</button>")
+                        .insertBefore(".container > div")
+                        .on("click", this.fechar);
+                },
+
+                exibir: function() {
+                    obj.container.slideDown(500);
+                },
+
+                fechar: function() {
+                    obj.container.slideUp(900);
+                }
+            };
+
+            obj.init();
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+      <div>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam delectus voluptas dolorum iure deleniti, voluptates explicabo eligendi est atque. Nulla maiores quos laboriosam, numquam asperiores, mollitia et reiciendis deleniti amet!</p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam delectus voluptas dolorum iure deleniti, voluptates explicabo eligendi est atque. Nulla maiores quos laboriosam, numquam asperiores, mollitia et reiciendis deleniti amet!</p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam delectus voluptas dolorum iure deleniti, voluptates explicabo eligendi est atque. Nulla maiores quos laboriosam, numquam asperiores, mollitia et reiciendis deleniti amet!</p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam delectus voluptas dolorum iure deleniti, voluptates explicabo eligendi est atque. Nulla maiores quos laboriosam, numquam asperiores, mollitia et reiciendis deleniti amet!</p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam delectus voluptas dolorum iure deleniti, voluptates explicabo eligendi est atque. Nulla maiores quos laboriosam, numquam asperiores, mollitia et reiciendis deleniti amet!</p>
+      </div>
+   </div>
+</body>
+</html>

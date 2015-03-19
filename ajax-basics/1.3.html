@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery - Ajax Basics 1.3</title>
+    <style>
+        *
+        {
+            margin: 0;
+        }
+        ul,li
+        {
+            display: inline-block;
+            margin-left: 50px;
+        }
+        ul,li:first-child
+        {
+            margin-left: 0;
+        }
+        .none
+        {
+            display: none;
+        }
+        .loader
+        {
+            background: url(ajax_loader.gif) center no-repeat;
+        }
+    </style>
+    <script src="../jquery.js"></script>
+    <script>
+        function Tour(el) {
+            var tour = this;
+            this.el = el;
+            this.fetchPhotos = function() {
+            $.ajax("/photos.html", {
+                context: tour,
+                data: {location: el.data("location")},
+                success: function(response) {
+                    this.el.find(".photos").html(response).fadeIn();
+                },
+                error: function() {
+                    this.el.find(".photos").html("<li>There was a problem fetching the latest photos. Please try again.</li>");
+                },
+                timeout: 3000,
+                beforeSend: function() {
+                    this.el.addClass("is-fetching");
+                },
+                complete: function() {
+                    this.el.removeClass("is-fetching");
+                }
+            });
+            }
+          this.el.on("click", "button", this.fetchPhotos);
+        }
+        $(document).ready(function() {
+          var paris = new Tour($("#paris"));
+        });
+
+
+
+
+        // var confirmacao = {
+        //     init: function(){
+        //         $(".lista").on("click", "button", this.loadConfirmacao);
+        //         $(".lista").on("click", ".link", this.showImagem);
+        //     },
+
+        //     loadConfirmacao: function(){
+        //         $.ajax("arquivo-que-sera-carregago.html", {
+        //             success: function(response)
+        //             {
+        //                 $(".informacao").html(response).slideDown();
+        //             },
+        //             timeout: 3000,
+        //             error: function(request, errorType, errorMessage)
+        //             {
+        //                 alert("Erro: " + errorType + " - " + errorMessage);
+        //             },
+        //             beforeSend: function() {
+        //                 $(".lista").addClass("loader");
+        //             },
+        //             complete: function() {
+        //                 $(".lista").removeClass("loader");
+        //             },
+        //             data: { "ConfNum": $(".lista").data("confNum") }
+        //         });
+        //     },
+        //     showImagem: function(evento){
+        //         evento.preventDefault();
+        //         $("img").toggleClass("none");
+        //     }
+        // };
+
+        // $(document).ready(function(){
+        //     confirmacao.init();
+        // });
+    </script>
+</head>
+<body>
+    <ul class="lista" data-confNum="1234">
+        <li id="brasil">
+            <h1>Título 1</h1>
+            <h2>Sub Título</h2>
+            <button>Clique para visualizar informações</button>
+            <div class="informacao">
+            </div>
+        </li>
+        <li id="london">
+            <h1>Título 2</h1>
+            <h2>Sub Título</h2>
+            <button>Clique para visualizar informações</button>
+            <div class="informacao">
+            </div>
+        </li>
+    </ul>
+</body>
+</html>

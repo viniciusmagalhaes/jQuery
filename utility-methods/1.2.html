@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery - Utility Methods 1.2</title>
+    <style>
+        *
+        {
+            margin: 0;
+        }
+
+        ul > li
+        {
+            display: inline-block;
+        }
+    </style>
+    <script src="../jquery.js"></script>
+    <script>
+        $(function(){
+
+            var array = ["Brasil", "Londres", "Italia"];
+
+            $.each(array, function(index, item){
+                var resultado = item + " - " + index;
+                // O metodo each retorna uma simples array, do mesma forma que foi criada
+                console.log(resultado);
+            });
+
+            $.map(array, function(item, index){
+                var resultadoMap = item + " - " + index;
+                console.log(resultadoMap);
+            });
+
+        });
+    </script>
+</head>
+<body>
+</body>
+</html>

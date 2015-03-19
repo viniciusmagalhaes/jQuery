@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery</title>
+    <script src="../../jquery.js"></script>
+    <script>
+        // ======================================================================================================================= //
+        // Keyboard Events: keypress | keydown | keyup |
+        // ======================================================================================================================= //
+
+        $(function(){
+            // O evento keyup é enviada a um elemento, quando o utilizador liberta uma tecla no teclado
+            $(".venda").on("keyup", ".number", function(){
+
+                // adicionar o + no inicio para converter a string em numero
+                var preco = +$(this).closest(".venda").data("price");
+
+                // pegar o valor do input e com o + converte a string em numero
+                var quantidade = +$("input").val();
+
+                // inclui o valor do preco na tag com a classe .total com o metodo text()
+                $("#total").text(preco * quantidade);
+            });
+
+
+            // quando o input receber foco, vamos adicionar o valor 2 para ele
+            $(".venda").on("focus", ".number", function(){
+                $(this).val(2);
+            });
+
+            // o evento keydown é enviado a um elemento, quando a tecla é pressionada
+            $(".keydown").on("keydown", "input", function(){
+                $(this).closest(".keydown").append("A tecla foi pressionada -");
+            });
+
+            // o evento keypress é enviado a um elemento, quando a tecla é pressionada exceto Shift, Esc and Delete
+            $(".keypress").on("keypress", "input", function(){
+                $(this).closest(".keypress").append("A tecla foi pressionada exceto Shift, Esc -");
+            });
+        });
+
+
+        // ======================================================================================================================= //
+        // Form Events: blur | select | change | focus | submit
+        // ======================================================================================================================= //
+
+        $(function(){
+
+            // o evento blur ocorre quando o elemento perde o foco
+            $(".blur").on("blur", "input", function(){
+                $(this).closest(".blur").append("Texto incluido após o elemento input ter perdido o foco");
+            });
+
+            // o evento select ocorre quando um texto é selecionado, este evento é limitado a input:text e textarea
+            $(".select").on("select", "input", function(){
+                $(this).closest(".select").append("O texto foi selecionado ");
+            });
+
+            // o evento change ocorre quando o valor do element é alterado, ele é limitado a input, textarea e select
+            $(".change").on("change", "select", function(){
+                var texto = "";
+
+                // o metodo each passa em todos os option"s como se fosse um for
+                $("option:selected").each(function(){
+                    texto += $(this).text();
+                });
+                $(this).closest(".change").find("div").text(texto);
+            });
+
+            // o evento focus ocorre quando o elemento recebe foco, em navegadores antigos isto se aplica apenas para, input select textarea e a
+            $(".focus input").focus(function(){
+                $(this).closest(".focus").append("elemento input recebeu foco ");
+            });
+
+            // o evento aplica-se a elemento input=type"submit" e button type="submit"
+            $(".submit").submit(function(){
+                $(this).append("o formulário foi submetido");
+            });
+
+        });
+    </script>
+</head>
+<body>
+    <div class="venda" data-price="200">
+        <h1>Título do produto</h1>
+        <p>Valor do produto 200</p>
+        <div>
+            <input class="number" type="number" value="" />
+        </div>
+    </div>
+
+    <p>Valor total <span id="total">$ 200</span></p>
+
+    <div class="keydown"><input type="text" /></div>
+
+    <div class="keypress"><input type="text" /></div>
+
+    <div class="blur"><input type="text" /></div>
+
+    <div class="select"><input type="text" value="Selecione este texto" /></div>
+
+    <form class="change">
+        <select multiple="multiple">
+            <option selected="selected">Opção 1</option>
+            <option>Opção 2</option>
+            <option selected="selected">Opção 3</option>
+            <option>Opção 4</option>
+        </select>
+        <div></div>
+    </form>
+
+    <div class="focus"><input type="text" /></div>
+
+    <form method="post" action="" class="submit">
+        <input type="submit" value="Submit" />
+        <button type="submit">Submit</button>
+    </form>
+
+</body>
+</html>

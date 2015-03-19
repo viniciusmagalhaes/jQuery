@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery</title>
+    <style>
+        #tours ul li
+        {
+            display: inline-block;
+            margin-left: 20px;
+            outline: 1px solid blue;
+        }
+        .destaque
+        {
+            background-color: blue;
+        }
+    </style>
+    <script src="../jquery.js"></script>
+</head>
+<body>
+    <script>
+        $(function(){
+            // ======================================================================================================================= //
+            // append | removeClass | addClass | filter
+            // ======================================================================================================================= //
+
+            $("#tours").on("click", "button", function(){
+                // Pegando o primeiro li ancestral do botão
+                $(this).closest("li").append("<p>Texto incluido</p>");
+                $(this).remove();
+            });
+
+            var li = $("#tours ul li");
+
+            $(".botoes").on("click", ".btn-1", function(){
+                $(".destaque").removeClass("destaque");
+                // filtra todos as li"s com classe .venda e retorna um novo objeto
+                li.filter(".venda").addClass("destaque");
+            });
+
+            $(".botoes").on("click", ".btn-2", function(){
+                $(".destaque").removeClass("destaque");
+                // filtra todos as li"s com classe .venda e retorna um novo objeto
+                li.filter(".aluguel").addClass("destaque");
+            });
+
+            $(".remover-todas-classes button").click(function(){
+                $(".remover-todas-classes li").removeClass(function(indice, valor){
+                    return ("item" + (indice + 1))
+                });
+            });
+        });
+    </script>
+    <div class="botoes">
+        <button class="btn-1">Venda</button>
+        <button class="btn-2">Aluguel</button>
+    </div>
+    <div id="tours">
+        <h1>Guided Tours</h1>
+        <ul>
+            <li>
+                <h2>New York, New York</h2>
+                <span class="details">$1,899 for 7 nights</span>
+                <button>botão</button>
+            </li>
+            <li class="venda">
+                <h2>New York, New York</h2>
+                <span class="details">$1,899 for 7 nights</span>
+                <button>botão</button>
+            </li>
+            <li class="aluguel">
+                <h2>New York, New York</h2>
+                <span class="details">$1,899 for 7 nights</span>
+                <button>botão</button>
+            </li>
+        </ul>
+    </div>
+
+
+    <div class="remover-todas-classes">
+        <button>Botão</button>
+        <ul>
+            <li class="item1">Item 1</li>
+            <li class="item2">Item 2</li>
+            <li class="item3">Item 3</li>
+        </ul>
+    </div>
+</body>
+</html>

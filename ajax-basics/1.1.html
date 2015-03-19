@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery - Ajax Basics 1.1</title>
+    <style>
+        *
+        {
+            margin: 0;
+        }
+        .none
+        {
+            display: none;
+        }
+        .loader
+        {
+            background: url(ajax_loader.gif) center no-repeat;
+        }
+    </style>
+    <script src="../jquery.js"></script>
+    <script>
+        $(function(){
+
+            $(".lista").on("click", "button", function(){
+                // chamada ajax com a url que queremos
+                $.ajax("arquivo-que-sera-carregago.html", {
+                    success: function(response)
+                    {
+                        $(".informacao").html(response).slideDown();
+                    },
+                    timeout: 3000,
+                    error: function(request, errorType, errorMessage)
+                    {
+                        alert("Erro: " + errorType + " - " + errorMessage);
+                    },
+                    beforeSend: function() {
+                        $(".lista").addClass("loader");
+                    },
+                    complete: function() {
+                        $(".lista").removeClass("loader");
+                    },
+                    data: { "ConfNum": $(".lista").data("confNum") }
+
+                });
+            });
+
+            $(".lista").on("click", ".link", function(){
+                $("img").toggleClass("none");
+            });
+
+
+            // Utilizando o método get
+            // $(".lista").on("click", "button", function(){
+            //     $.get("arquivo-que-sera-carregago.html", function(response){
+            //         $(".informacao").html(response).slideDown();
+            //     });
+            // });
+
+        });
+    </script>
+</head>
+<body>
+    <ul class="lista" data-confNum="1234">
+        <li>
+            <h1>Título</h1>
+            <h2>Sub Título</h2>
+            <button>Clique para visualizar informações</button>
+            <div class="informacao">
+            </div>
+        </li>
+    </ul>
+</body>
+</html>

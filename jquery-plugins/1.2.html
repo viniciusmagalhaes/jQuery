@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Jquery</title>
+    <style>
+        ul li
+        {
+            display: inline-block;
+        }
+        .none
+        {
+            display: none;
+        }
+    </style>
+    <script src="../jquery.js"></script>
+    <script>
+        $.fn.teste = function (options){
+
+            this.each(function(){
+
+                var show = function(){
+                    $(this).closest("li").find(".itens").removeClass("none");
+                }
+                var showAll = function(){
+                    $(this).find(".itens").removeClass("none");
+                }
+                $(".lista").on("click", "button", show);
+                $(".lista").on("exibir.todos", showAll);
+            });
+        }
+
+        $(document).ready(function(){
+            $("li").teste();
+
+            $(".exibir-todos").click(function(e){
+                e.preventDefault();
+                $("li").trigger("exibir.todos");
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="lista">
+        <a href="#" class="exibir-todos">Exibir Todos</a>
+        <ul>
+            <li data-price="200">
+                <h2>Título 1</h2>
+                <button class="exibir">Exibir</button><br />
+                <ul class="itens none">
+                    <li>item</li>
+                    <li>item</li>
+                    <li>item</li>
+                </ul>
+            </li>
+            <li data-price="300">
+                <h2>Título 2</h2>
+                <button class="exibir">Exibir</button><br />
+                <ul class="itens none">
+                    <li>item</li>
+                    <li>item</li>
+                    <li>item</li>
+                </ul>
+            </li>
+            <li data-price="400">
+                <h2>Título 3</h2>
+                <button class="exibir">Exibir</button><br />
+                <ul class="itens none">
+                    <li>item</li>
+                    <li>item</li>
+                    <li>item</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery</title>
+    <script src="../jquery.js"></script>
+    <script>
+        $(function(){
+
+            $.fn.teste = function(options) {
+
+                $(this).animate({
+                    opacity: 0,
+                    marginLeft: options.left
+                }, 900);
+            }
+
+            $('a').on('click', function(e){
+                e.preventDefault();
+                $(this).teste({ left: '500px' });
+            });
+
+        });
+    </script>
+</head>
+<body>
+    <a target="_blank" href="http://tutsplus.com/">link</a>
+    <a target="_blank" href="http://tutsplus.com/">link</a>
+    <div>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque quis quam porro. Sint in at dolorum magni deleniti praesentium reprehenderit, itaque placeat a repellendus nobis cumque nostrum corporis iure! Quidem.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque quis quam porro. Sint in at dolorum magni deleniti praesentium reprehenderit, itaque placeat a repellendus nobis cumque nostrum corporis iure! Quidem.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque quis quam porro. Sint in at dolorum magni deleniti praesentium reprehenderit, itaque placeat a repellendus nobis cumque nostrum corporis iure! Quidem.</p>
+    </div>
+</body>
+</html>

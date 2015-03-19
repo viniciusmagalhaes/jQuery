@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery</title>
+    <style>
+        .none
+        {
+            display: none;
+        }
+    </style>
+    <script src="../jquery.js"></script>
+    <script>
+        // ======================================================================================================================= //
+        //  Effects:  fadeIn | fadeDown | fadeToggle
+        // ======================================================================================================================= //
+
+        $(function(){
+            $(".teste").on("click", "button", function(){
+                $(this).closest("li").children("div").fadeToggle();
+            });
+
+            $(".lista li").on("click", function(){
+                // adicionar a classe "destaque" no primeiro click, e no segundo click remove a classe
+                $(this).toggleClass("destaque");
+                // remove a classe no primeiro click pois ela já existe, e no segundo click adiciona
+                $(this).find("div").toggleClass("none");
+            });
+        });
+    </script>
+</head>
+<body>
+    <ul class="teste">
+        <li>
+            <h1>Título</h1>
+            <h2>Sub título</h2>
+            <button>Abre o comentário</button>
+            <div class="none">
+                <p>Lorem ipsum dolor sit</p>
+            </div>
+        </li>
+    </ul>
+
+    <ul class="lista">
+        <li>
+            <p>Lorem ipsum</p>
+            <div class="preco none">
+                R$ 100,00
+            </div>
+        </li>
+        <li>
+            <p>Lorem ipsum</p>
+            <div class="preco none">
+                R$ 100,00
+            </div>
+        </li>
+    </ul>
+</body>
+</html>

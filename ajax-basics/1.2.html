@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery - Ajax Basics 1.2</title>
+    <style>
+        *
+        {
+            margin: 0;
+        }
+        .none
+        {
+            display: none;
+        }
+        .loader
+        {
+            background: url(ajax_loader.gif) center no-repeat;
+        }
+    </style>
+    <script src="../jquery.js"></script>
+    <script>
+
+        var confirmacao = {
+            init: function(){
+                $(".lista").on("click", "button", this.loadConfirmacao);
+                $(".lista").on("click", ".link", this.showImagem);
+            },
+
+            loadConfirmacao: function(){
+                $.ajax("arquivo-que-sera-carregago.html", {
+                    success: function(response)
+                    {
+                        $(".informacao").html(response).slideDown();
+                    },
+                    timeout: 3000,
+                    error: function(request, errorType, errorMessage)
+                    {
+                        alert("Erro: " + errorType + " - " + errorMessage);
+                    },
+                    beforeSend: function() {
+                        $(".lista").addClass("loader");
+                    },
+                    complete: function() {
+                        $(".lista").removeClass("loader");
+                    },
+                    data: { "ConfNum": $(".lista").data("confNum") }
+                });
+            },
+            showImagem: function(evento){
+                evento.preventDefault();
+                $("img").toggleClass("none");
+            }
+        };
+
+        $(document).ready(function(){
+            confirmacao.init();
+        });
+    </script>
+</head>
+<body>
+    <ul class="lista" data-confNum="1234">
+        <li>
+            <h1>Título 1234</h1>
+            <h2>Sub Título</h2>
+            <button>Clique para visualizar informações</button>
+            <div class="informacao">
+            </div>
+        </li>
+    </ul>
+</body>
+</html>

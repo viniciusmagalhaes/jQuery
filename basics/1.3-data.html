@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery</title>
+    <style>
+        #tours ul li
+        {
+            display: inline-block;
+            margin-left: 20px;
+            outline: 1px solid blue;
+        }
+    </style>
+    <script src="../jquery.js"></script>
+</head>
+<body>
+    <script>
+        $(function(){
+            // ======================================================================================================================= //
+            // closest | data |
+            // ======================================================================================================================= //
+
+            $("#tours").on("click", "button", function(){
+                // pegar a primeira li ancestral do botão
+                var li = $(this).closest("li");
+
+                // peguei o valor do data-price na li
+                var preco = li.data("price");
+
+                // adicionar o preço no final da li
+                li.append("<br /><b>Valor do data-price: " + preco + "</b>");
+                $(this).remove();
+            });
+
+        });
+    </script>
+    <div id="tours">
+        <h1>Guided Tours</h1>
+        <ul>
+            <li data-price="1222">
+                <h2>New York, New York</h2>
+                <span class="details">$1,899 for 7 nights</span>
+                <button>botão</button>
+            </li>
+            <li class="venda" data-price="1333">
+                <h2>New York, New York</h2>
+                <span class="details">$1,899 for 7 nights</span>
+                <button>botão</button>
+            </li>
+            <li class="aluguel" data-price="1444">
+                <h2>New York, New York</h2>
+                <span class="details">$1,899 for 7 nights</span>
+                <button>botão</button>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>

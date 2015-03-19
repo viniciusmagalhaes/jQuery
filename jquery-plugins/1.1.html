@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Jquery</title>
+    <style>
+        ul li
+        {
+            display: inline-block;
+        }
+    </style>
+    <script src="../jquery.js"></script>
+    <script>
+        $.fn.pluginPreco = function (options){
+
+            this.each(function(){
+                var li = $(this);
+                li.on("click", "button", function(){
+                    var preco = li.data("price");
+                    var detalhe = $("<p>" +  options.days * preco + "</p>");
+                    $(this).hide();
+                    li.append(detalhe);
+                });
+            });
+
+        };
+
+        $(document).ready(function(){
+            $("li").pluginPreco({ days: 2 });
+        });
+    </script>
+</head>
+<body>
+    <ul>
+        <li data-price="200">
+            <h2>Título 1</h2>
+            <button class="exibir">Exibir</button><br />
+        </li>
+        <li data-price="300">
+            <h2>Título 2</h2>
+            <button class="exibir">Exibir</button><br />
+        </li>
+        <li data-price="400">
+            <h2>Título 3</h2>
+            <button class="exibir">Exibir</button><br />
+        </li>
+    </ul>
+</body>
+</html>

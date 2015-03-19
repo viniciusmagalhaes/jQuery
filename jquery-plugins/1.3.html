@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Jquery</title>
+    <style>
+        ul li
+        {
+            display: inline-block;
+        }
+        .none
+        {
+            display: none;
+        }
+    </style>
+    <script src="../jquery.js"></script>
+    <script>
+        $.fn.testePlugin = function (options) {
+
+            this.each(function(){
+                var show = function (event){
+                    event.preventDefault();
+                    settings.li
+                            .find("ul")
+                            .removeClass("none");
+                }
+                var settings = $.extend({
+                    count: 3,
+                    li: $(this)
+                }, options);
+                settings.li.on("click.testePlugin", "button", show);
+                settings.li.on("show.testePlugin", show);
+            });
+        };
+
+        $(document).ready(function(){
+            $("li").testePlugin({ count: 1 });
+
+            $(".exibir-todos").click(function(e){
+                e.preventDefault();
+                $("li").trigger("show.testePlugin");
+            });
+        });
+    </script>
+</head>
+<body>
+    <a href="#" class="exibir-todos">Exibir todos</a>
+    <ul>
+        <li data-price="200">
+            <h2>Título 1</h2>
+            <ul class="none">
+                <li>item</li>
+                <li>item</li>
+                <li>item</li>
+            </ul>
+            <button class="exibir">Exibir</button><br />
+        </li>
+        <li data-price="300">
+            <h2>Título 2</h2>
+            <ul class="none">
+                <li>item</li>
+                <li>item</li>
+                <li>item</li>
+            </ul>
+            <button class="exibir">Exibir</button><br />
+        </li>
+        <li data-price="400">
+            <h2>Título 3</h2>
+            <ul class="none">
+                <li>item</li>
+                <li>item</li>
+                <li>item</li>
+            </ul>
+            <button class="exibir">Exibir</button><br />
+        </li>
+    </ul>
+</body>
+</html>

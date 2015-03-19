@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery</title>
+    <style>
+        .none
+        {
+            display: none;
+        }
+    </style>
+    <script src="../jquery.js"></script>
+    <script>
+        // ======================================================================================================================= //
+        // click | mouseenter | mouseout | mousedown | mouseup | mouseleave | mousemove | focusin | focusout | dblclick |
+        // ======================================================================================================================= //
+
+        // função para simplificar repetição de código
+        function abrirInformacoes () {
+            // para o elemento botão eu voltei a primeira li antestral e procurei por uma ul e apliquei o slideToggle.
+            $(this).closest("li").find("ul").slideToggle();
+        }
+
+        $(function(){
+            $(".informacoes").on("click", "button", abrirInformacoes);
+
+            // quando passar o mouse no elemento
+            $(".informacoes").on("mouseenter", ".mouseenter", abrirInformacoes);
+
+            // quando tirar o mouse do elemento Este metodo é proprietária para Internet Explorer
+            $(".informacoes").on("mouseleave", ".mouseleave", abrirInformacoes);
+
+            // O evento mousemove é enviado para um elemento quando o ponteiro do mouse se move dentro do elemento. Qualquer elemento HTML pode receber este evento.
+            $(".informacoes").on("mousemove", ".mousemove", function(evento){
+                $(".valorxy").text(evento.pageX + " - " + evento.pageY);
+            });
+
+            // O evento do mousedown é enviado quando o elemento é pressionado
+            $(".informacoes").on("mousedown", ".mousedown", function(){
+                $(this).append("Texto incluido após o Mousedown ter sido pressionado");
+            });
+
+            // O evento do mouseup é enviado quando o botão do mouse é liberado
+            $(".informacoes").on("mouseup", ".mouseup", function(){
+                $(this).append("Texto incluido texto após o botão do mouse ter sido liberado");
+            });
+
+            // O evento aplica-se ao elemento pai e todos os filhos, diferente do evento focus que recebe apenas no elemento pai
+            $(".informacoes").on("focusin", ".focusin", function(){
+                $(this).append("o elemento recebeu focus in");
+            });
+
+            // O evento aplica-se ao elemento pai e todos os filhos, diferente do evento blur que recebe apenas no elemento pai
+            $(".informacoes").on("focusout", ".focusout", function(){
+                $(this).append("o elemento recebeu focus out");
+            });
+
+            // O evento dblclick é enviado para um elemento quando o elemento é clicado duas vezes
+            $(".informacoes").on("dblclick", ".dblclick", abrirInformacoes);
+        });
+    </script>
+</head>
+<body>
+    <ul class="informacoes">
+        <li>
+            <h3 class="mouseenter">Mouse enter</h3>
+            <h3 class="mouseleave">Mouse leave</h3>
+            <h3 class="mousemove">Mouse Move <span class="valorxy"></span></h3>
+            <h3 class="mousedown">Mouse Down</h3>
+            <h3 class="mouseup">Mouse up</h3>
+            <p class="focusin">
+                <input type="text" />
+                <span></span>
+            </p>
+            <p class="focusout">
+                <input type="text" />
+                <span></span>
+            </p>
+            <h3 class="dblclick">Double click</h3>
+
+            <button>Clique para ver mais informações</button>
+            <ul class="none">
+                <li>
+                    <p>Mais informações</p>
+                    <strong>Produto</strong>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</body>
+</html>

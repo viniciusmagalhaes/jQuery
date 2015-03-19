@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery - Utility Methods 1.1</title>
+    <style>
+        *
+        {
+            margin: 0;
+        }
+
+        ul > li
+        {
+            display: inline-block;
+        }
+    </style>
+    <script src="../jquery.js"></script>
+    <script>
+        $(function(){
+            $("ul").on("click", "button", function(){
+                // $.getJSON("teste.json", function(data){
+                //     var li = $("li");
+                //     li.find("p").html(data.paragrafo);
+                // });
+
+                $.ajax("teste.json", {
+                    contentType: "application/json",
+                    dataType: "json",
+                    success: function(resultado){
+                        $.each(resultado, function(index, valor){
+                            var li = $(".item-" + index);
+                            li.find("p").html(valor.nome);
+                            li.find("img")
+                                .attr("src", valor.image);
+                        });
+                    }
+                });
+            });
+
+
+            $(".atualizar").on("click", function(){
+                $.getJSON("atualizar.json", function(sucesso){
+
+                    var elementos = $.map(sucesso, function(item, index){
+                        var lista = $("<li></li>");
+                        $("<h3>" + item.nome + "</h3>").appendTo(lista);
+                        $("<p>" + item.status + "</p>").appendTo(lista);
+                        return lista;
+                    });
+                    $("ul").detach().html(elementos).appendTo("div");
+                });
+            });
+
+
+            // var meuArray = [1,2,3,4,5];
+            // var novaArray = $.map(meuArray, function(item, index){
+            //     return item + 1;
+            // });
+            // document.write(novaArray);
+
+        });
+    </script>
+</head>
+<body>
+    <button class="atualizar">Atualizar itens</button>
+    <div>
+        <ul>
+            <li class="item-0">
+                <h1>Título 1</h1>
+                <p></p>
+                <img src=""><br />
+                <button>Clique para visualizar</button>
+                <b></b>
+            </li>
+            <li class="item-1">
+                <h1>Título 2</h1>
+                <p></p>
+                <img src=""><br />
+                <button>Clique para visualizar</button>
+            </li>
+            <li class="item-2">
+                <h1>Título 3</h1>
+                <p></p>
+                <img src=""><br />
+                <button>Clique para visualizar</button>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>

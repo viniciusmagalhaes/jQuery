@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Jquery</title>
+    <style>
+        ul li
+        {
+            display: inline-block;
+        }
+    </style>
+    <script src="../jquery.js"></script>
+    <script>
+        $(function(){
+
+            function showPrice() {
+                var li = $(this).closest("li");
+                var preco = li.data("price");
+                li.append(3 * preco);
+                $(this).off("click");
+            }
+
+            $("button").on("click", showPrice);
+
+
+            function showAlert(){
+                alert("Evento personalizado");
+            }
+            // criando um evento personalizado
+            $(".personalizado").on("evento", showAlert);
+            // utilizando o metodo gatilho para chamar o evento personalizado
+            $(".personalizado").trigger("evento");
+
+        });
+    </script>
+</head>
+<body>
+    <button class="personalizado">Evento personalizado</button>
+    <ul>
+        <li data-price="200">
+            <h2>Lorem ipsum</h2>
+            <p>Dolor sit</p>
+            <button>Exibir</button>
+        </li>
+        <li data-price="300">
+            <h2>Lorem ipsum</h2>
+            <p>Dolor sit</p>
+            <button>Exibir</button>
+        </li>
+        <li data-price="400">
+            <h2>Lorem ipsum</h2>
+            <p>Dolor sit</p>
+            <button>Exibir</button>
+        </li>
+    </ul>
+</body>
+</html>

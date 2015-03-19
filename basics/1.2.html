@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery</title>
+    <script src="../jquery.js"></script>
+</head>
+<body>
+    <script>
+        $(function(){
+            // ======================================================================================================================= //
+            // before | append | appendTo | prepend |
+            // ======================================================================================================================= //
+
+            // Adicionar texto antes do botão
+            $("#tours ul li button").before("<b>Texto antes do botão utilizando o before</b>");
+
+            $(".teste-on button").on("click", function(){
+
+                var preco = $("<p>Incluir texto e remover botão</p>");
+
+                // Adicionar texto no final da li
+                $(".teste-on ul li").append(preco);
+
+                // A principal diferença está na sintaxe, especificamente, na colocação do conteúdo e do alvo
+                $("<p>Incluir texto e remover botão</p>").appendTo(".teste-on ul li");
+
+                $(".teste-on ul li button").remove();
+            });
+        });
+    </script>
+    <div id="tours">
+        <h1>Guided Tours</h1>
+        <ul>
+            <li>
+                <h2>New York, New York</h2>
+                <span class="details">$1,899 for 7 nights</span>
+                <button>botão</button>
+            </li>
+        </ul>
+    </div>
+    <div class="teste-on">
+        <ul>
+            <li>
+                <h2>New York, New York</h2>
+                <span class="details">$1,899 for 7 nights</span>
+                <button>botão</button>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>
